@@ -1,0 +1,17 @@
+Log File created 2022-01-24 19:49:40.700655
+
+<2022-01-24 19:49:40.736663>  -  UI File src\ui\crype.ui successful loaded
+
+<2022-01-24 19:49:49.327450>  -  Pressed Encrypt button
+
+<2022-01-24 19:49:49.333451>  -  vkey: Key is not an Integer (Number) [deineMutter]
+
+<2022-01-24 19:49:53.046468>  -  Pressed Encrypt button
+
+<2022-01-24 19:49:53.052470>  -  vkey: Key is not an Integer (Number) [deineMutter]
+
+<2022-01-24 19:49:53.599321>  -  Pressed Decrypt button
+
+<2022-01-24 19:49:53.605323>  -  vkey: Key is not an Integer (Number) [deineMutter]
+
+<2022-01-24 19:49:56.377325>  -  Closed Window with topright_x

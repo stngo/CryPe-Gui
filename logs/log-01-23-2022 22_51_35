@@ -1,0 +1,13 @@
+Log File created 2022-01-23 22:51:35.087483
+
+<2022-01-23 22:51:35.124491>  -  UI File src\ui\crype.ui successful loaded
+
+<2022-01-23 22:51:42.355477>  -  Pressed Encrypt button
+
+<2022-01-23 22:51:42.362480>  -  Done with encrypted file (text.txt, 17)
+
+<2022-01-23 22:51:45.420480>  -  Pressed Decrypt button
+
+<2022-01-23 22:51:45.431482>  -  Done with decrypted file (text.txt_e, 17)
+
+<2022-01-23 22:51:53.792479>  -  Closed Window with topright_x

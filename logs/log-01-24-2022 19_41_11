@@ -1,0 +1,47 @@
+Log File created 2022-01-24 19:41:11.849026
+
+<2022-01-24 19:41:11.886034>  -  UI File src\ui\crype.ui successful loaded
+
+<2022-01-24 19:41:15.886169>  -  Pressed Encrypt button
+
+<2022-01-24 19:41:15.893171>  -  vfilename: file not found (123)
+
+<2022-01-24 19:41:15.900172>  -  Done with encrypted file (123, 5)
+
+<2022-01-24 19:41:19.246687>  -  Pressed Decrypt button
+
+<2022-01-24 19:41:19.252688>  -  vfilename: file not found (123)
+
+<2022-01-24 19:41:19.258691>  -  Done with decrypted file (123, 5)
+
+<2022-01-24 19:41:19.765996>  -  Pressed Decrypt button
+
+<2022-01-24 19:41:19.771998>  -  vfilename: file not found (123)
+
+<2022-01-24 19:41:19.777999>  -  Done with decrypted file (123, 5)
+
+<2022-01-24 19:41:26.958231>  -  Pressed Encrypt button
+
+<2022-01-24 19:41:26.965233>  -  vfilename: file not found (OK OK IST SCHON GUT.exe)
+
+<2022-01-24 19:41:26.971234>  -  Done with encrypted file (OK OK IST SCHON GUT.exe, 67)
+
+<2022-01-24 19:41:29.766150>  -  Pressed Encrypt button
+
+<2022-01-24 19:41:29.773153>  -  vfilename: file not found (OK OK IST SCHON GUT.exe)
+
+<2022-01-24 19:41:29.779154>  -  Done with encrypted file (OK OK IST SCHON GUT.exe, 1235)
+
+<2022-01-24 19:41:30.654148>  -  Pressed Encrypt button
+
+<2022-01-24 19:41:30.661151>  -  vfilename: file not found (OK OK IST SCHON GUT.exe)
+
+<2022-01-24 19:41:30.667153>  -  Done with encrypted file (OK OK IST SCHON GUT.exe, 1235)
+
+<2022-01-24 19:41:31.271159>  -  Pressed Encrypt button
+
+<2022-01-24 19:41:31.277669>  -  vfilename: file not found (OK OK IST SCHON GUT.exe)
+
+<2022-01-24 19:41:31.283669>  -  Done with encrypted file (OK OK IST SCHON GUT.exe, 1235)
+
+<2022-01-24 19:41:41.238457>  -  Pressed Encrypt button
