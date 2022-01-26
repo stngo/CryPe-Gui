@@ -5,7 +5,7 @@ from PyQt5 import uic
 
 from src import osy
 
-ui_path = 'src\\ui\\official.xml'
+ui_path = 'src\\ui\\debug_ui.xml'
 
 #LOG_DEF_LINE = f'{datetime.today()}'  # Not working, its the same time xD im stupid
 
