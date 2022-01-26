@@ -1,2 +1,0 @@
-OUTPUT IS "dist/"
-there's the .exe
