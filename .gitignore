@@ -1,2 +1,4 @@
 
 build/*
+__pycache__/main.cpython-39.pyc
+src/ui/ome.sb
