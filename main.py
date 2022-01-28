@@ -31,7 +31,7 @@ else: debug = False
 
 #
 LOCATION_UI = string('src\\UI\\')
-UI_FILENAME = string('ui.ms')
+UI_FILENAME = string('ui.gui')
 #
 
 if debug == True:
