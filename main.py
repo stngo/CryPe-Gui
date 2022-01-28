@@ -1,6 +1,7 @@
 import sys,time,os
 from datetime import datetime
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt5.QtGui import QIcon
 from PyQt5 import uic
 from src.PFP import cpp
 
@@ -32,6 +33,7 @@ else: debug = False
 #
 LOCATION_UI = string('src\\UI\\')
 UI_FILENAME = string('ui.gui')
+ICON_PATH = string('src\\ICO\\stpyi.ico')
 #
 
 if debug == True:
@@ -42,6 +44,8 @@ class MainApp(QMainWindow, QWidget):
 	def __init__(self):
 		super().__init__()
 		uic.loadUi(LOCATION_UI + UI_FILENAME, self)
+		self.setWindowIcon(QIcon(ICON_PATH))
+
 
 		self.button_Encrypt.clicked.connect(self.encryption_file) # Connect button to a function
 		self.button_Decrypt.clicked.connect(self.decryption_file) # Same too
