@@ -1,95 +1,173 @@
-import sys,time
+import sys,time,os
 from datetime import datetime
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5 import uic
+from src.PFP import cpp
 
-from src import osy
 
-ui_path = 'src\\ui\\debug_ui.xml'
+print('CryPe started at %s \nMade by syke (D4R10) - Python 3.9\n  if you see this, you started the debug app, or a dev\n' % cpp.date)
 
-#LOG_DEF_LINE = f'{datetime.today()}'  # Not working, its the same time xD im stupid
+LOG_NAME = 'log-%s.log' % cpp.datereg
+cpp.init.logHandler.createFile(LOG_NAME)
 
-logname = f'log-{osy.datereg}'
-osy.init.logHandler.createFile(logname)
+logwrite = cpp.init.logHandler.writeLine
 
-#t = [f'<{datetime.today()}>  -  UI File {ui_path} successful loaded', f'<{datetime.today()}>  -  Pressed Encrypt button', f'<{datetime.today()}>  -  Pressed Decrypt button', f'<{datetime.today()}>  -  vkey: ValueError']
-# upper not working lol stupid again
+string = str
+integer = int
 
+n = '\n'
+
+#
+LOCATION_UI = string('src\\UI\\')
+UI_FILENAME = string('ui.ms')
+#
 
 class MainApp(QMainWindow, QWidget):
 	def __init__(self):
 		super().__init__()
-		uic.loadUi(ui_path, self)
+		uic.loadUi(LOCATION_UI + UI_FILENAME, self)
 
+		self.button_Encrypt.clicked.connect(self.encryption_file) # Connect button to a function
+		#self.button_Decrypt.clicked.connect(self.decrytion_file) # Same too
+
+	def encryption_file(self):
+		# GET KEY AND FILENAME
+		V_FILENAME = string(self.line_filename.text())
 		
-		osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  UI File {ui_path} successful loaded')
-
-		self.button_Encrypt.clicked.connect(self.EncryptFile)
-		self.button_Decrypt.clicked.connect(self.DecryptFile)
-
-
-
-	def exitProgram(self):
-		exit()
-
-	def EncryptFile(self):
-		vkey = self.line_key.text()
-		vfilename = self.line_filename.text()
-		osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  Pressed Encrypt button')
-
-		try:
-			vkey = int(vkey)
-		except ValueError:
-			print('\nError: ValueError')
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  vkey: Key is not an Integer (Number) [{vkey}]')
+		if V_FILENAME == None:
+			error_msg = '<System> -> No File?'
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> No File typed in the box')
+			logwrite(LOG_NAME, log_txt)
 			return
-
-		print(f'\nvkey: {vkey}\nvfilename: {vfilename}\n')
-
-		try:
-			osy.init.encrypt(vfilename, vkey)
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  Done with encrypted file ({vfilename}, {vkey})')
-			self.label_status.setText('DONE')
-			time.sleep(0.5)
-			self.label_status.setText('')
-
-		except FileNotFoundError:
-			print('FILE NOT FOUND')
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  vfilename: file not found ({vfilename})')
-		except ValueError:
-			print('OVER 255 LIMIT')
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  vkey: over 255 limit')
-
-	def DecryptFile(self):
-		vkey = self.line_key.text()
-		vfilename = self.line_filename.text()
-		osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  Pressed Decrypt button')
-
-		try:
-			vkey = int(vkey)
-		except ValueError:
-			print('\nError: ValueError')
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  vkey: Key is not an Integer (Number) [{vkey}]')
+		if os.path.exists(V_FILENAME):
+			pass
+		else:
+			print("<System> -> File doesn't exists! (%s)" % V_FILENAME)
+            
+			log_txt = string(f"<{datetime.today()}> -> File doesn't exists (%s)" % V_FILENAME)
+			logwrite(LOG_NAME, log_txt)
 			return
-
-		print(f'\nvkey: {vkey}\nvfilename: {vfilename}\n')
-
+        
+        
 		try:
-			osy.init.decrypt(vfilename, vkey)
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  Done with decrypted file ({vfilename}, {vkey})')
-			self.label_status.setText('DONE')
-			time.sleep(0.5)
-			self.label_status.setText('')
-
-		except FileNotFoundError:
-			print('FILE NOT FOUND')
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  vfilename: file not found ({vfilename})')
+			V_KEY = integer(self.line_key.text())
 		except ValueError:
-			print('OVER 255 LIMIT')
-			osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  vkey: over 255 limit')
+			error_msg = '<ValueError> -> %s' % self.line_key.text()
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> ValueError (%s)' % self.line_key.text())
+			logwrite(LOG_NAME, log_txt)
+			return
+		
+		if V_KEY >= 255:
+			error_msg = '<ValueError> -> %s (over 255)' % V_KEY
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> Key is over 255')
+			logwrite(LOG_NAME, log_txt)
+			return
+		elif V_KEY <= 0:
+			error_msg = '<ValueError> -> %s (under 1)' % V_KEY
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> Key is under 1')
+			logwrite(LOG_NAME, log_txt)
+			return
+		elif V_KEY == None:
+			error_msg = '<System> -> No Key?'
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> Key is None (nothing typed in)')
+			logwrite(LOG_NAME, log_txt)
+			return
+		else:
+            # Decrypt the File
+			msg_status = string('USED:')
+			msg_status1 = string(' Filename: %s' % V_FILENAME)
+			msg_status2 = string(' Key: %s' % V_KEY)
+			print(msg_status + n + msg_status1 + n + msg_status2)
+			
+			cpp.init.decrypt(V_FILENAME, V_KEY)
+            
+			log_txt = string(f'<{datetime.today()}> -> Finished decoding %s' % V_FILENAME)
+			logwrite(LOG_NAME, log_txt)
+		
+		return
+
+
+	def decryption_file(self):
+        # GET KEY AND FILENAME
+		V_FILENAME = string(self.line_filename.text())
+		
+		if V_FILENAME == None:
+			error_msg = '<System> -> No File?'
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> No File typed in the box')
+			logwrite(LOG_NAME, log_txt)
+			return
+		if os.path.exists(V_FILENAME):
+			pass
+		else:
+			print("<System> -> File doesn't exists! (%s)" % V_FILENAME)
+            
+			log_txt = string(f"<{datetime.today()}> -> File doesn't exists (%s)" % V_FILENAME)
+			logwrite(LOG_NAME, log_txt)
+			return
+        
+        
+		try:
+			V_KEY = integer(self.line_key.text())
+		except ValueError:
+			error_msg = '<ValueError> -> %s' % self.line_key.text()
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> ValueError (%s)' % self.line_key.text())
+			logwrite(LOG_NAME, log_txt)
+			return
+		
+		if V_KEY >= 255:
+			error_msg = '<ValueError> -> %s (over 255)' % V_KEY
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> Key is over 255')
+			logwrite(LOG_NAME, log_txt)
+			return
+		elif V_KEY <= 0:
+			error_msg = '<ValueError> -> %s (under 1)' % V_KEY
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> Key is under 1')
+			logwrite(LOG_NAME, log_txt)
+			return
+		elif V_KEY == None:
+			error_msg = '<System> -> No Key?'
+			print(error_msg)
+            
+			log_txt = string(f'<{datetime.today()}> -> Key is None (nothing typed in)')
+			logwrite(LOG_NAME, log_txt)
+			return
+		else:
+            # Decrypt the File
+			msg_status = string('USED:')
+			msg_status1 = string(' Filename: %s' % V_FILENAME)
+			msg_status2 = string(' Key: %s' % V_KEY)
+			print(msg_status + n + msg_status1 + n + msg_status2)
+			
+			cpp.init.decrypt(V_FILENAME, V_KEY)
+            
+			log_txt = string(f'<{datetime.today()}> -> Finished decoding %s' % V_FILENAME)
+			logwrite(LOG_NAME, log_txt)
+		return
+
+
+
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
+	print(app)
 
 	appMain = MainApp()
 	appMain.show()
@@ -97,5 +175,6 @@ if __name__ == '__main__':
 	try:
 		sys.exit(app.exec_())
 	except SystemExit:
-		osy.init.logHandler.writeLine(logname, f'<{datetime.today()}>  -  Closed Window with topright_x')
-		print('Closing Window...')
+		log_txt = string(f'<{datetime.today()}> -> Closed program with win.TOPRIGHT_X')
+		logwrite(LOG_NAME, log_txt)
+		print('\nExit program...')
