@@ -4,8 +4,9 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5 import uic
 from src.PFP import cpp
 
-
+cpp.clear()
 print('CryPe started at %s \nMade by syke (D4R10) - Python 3.9\n  if you see this, you started the debug app, or a dev\n' % cpp.date)
+
 
 LOG_NAME = 'log-%s.log' % cpp.datereg
 cpp.init.logHandler.createFile(LOG_NAME)
@@ -18,9 +19,24 @@ integer = int
 n = '\n'
 
 #
+try:
+	ARG_1 = sys.argv[1]
+except IndexError:
+	ARG_1 = None
+	pass
+
+if ARG_1 == '.debug':
+	debug = True
+else: debug = False
+
+#
 LOCATION_UI = string('src\\UI\\')
 UI_FILENAME = string('ui.ms')
 #
+
+if debug == True:
+	i='Debug is activated, you can now see hidden text'
+	print(i)
 
 class MainApp(QMainWindow, QWidget):
 	def __init__(self):
@@ -28,7 +44,7 @@ class MainApp(QMainWindow, QWidget):
 		uic.loadUi(LOCATION_UI + UI_FILENAME, self)
 
 		self.button_Encrypt.clicked.connect(self.encryption_file) # Connect button to a function
-		#self.button_Decrypt.clicked.connect(self.decrytion_file) # Same too
+		self.button_Decrypt.clicked.connect(self.decryption_file) # Same too
 
 	def encryption_file(self):
 		# GET KEY AND FILENAME
@@ -84,14 +100,15 @@ class MainApp(QMainWindow, QWidget):
 			return
 		else:
             # Decrypt the File
-			msg_status = string('USED:')
-			msg_status1 = string(' Filename: %s' % V_FILENAME)
-			msg_status2 = string(' Key: %s' % V_KEY)
-			print(msg_status + n + msg_status1 + n + msg_status2)
+			if debug:
+				msg_status = string('USED:')
+				msg_status1 = string(' Filename: %s' % V_FILENAME)
+				msg_status2 = string(' Key: %s' % V_KEY)
+				print(msg_status + n + msg_status1 + n + msg_status2)
 			
 			cpp.init.decrypt(V_FILENAME, V_KEY)
             
-			log_txt = string(f'<{datetime.today()}> -> Finished decoding %s' % V_FILENAME)
+			log_txt = string(f'<{datetime.today()}> -> Finished encoding %s' % V_FILENAME)
 			logwrite(LOG_NAME, log_txt)
 		
 		return
@@ -151,10 +168,11 @@ class MainApp(QMainWindow, QWidget):
 			return
 		else:
             # Decrypt the File
-			msg_status = string('USED:')
-			msg_status1 = string(' Filename: %s' % V_FILENAME)
-			msg_status2 = string(' Key: %s' % V_KEY)
-			print(msg_status + n + msg_status1 + n + msg_status2)
+			if debug:
+				msg_status = string('USED:')
+				msg_status1 = string(' Filename: %s' % V_FILENAME)
+				msg_status2 = string(' Key: %s' % V_KEY)
+				print(msg_status + n + msg_status1 + n + msg_status2)
 			
 			cpp.init.decrypt(V_FILENAME, V_KEY)
             
@@ -167,9 +185,14 @@ class MainApp(QMainWindow, QWidget):
 
 if __name__ == '__main__':
 	app = QApplication(sys.argv)
-	print(app)
+
+	
 
 	appMain = MainApp()
+
+	if debug:
+		print(string(app) + n + str(appMain))
+
 	appMain.show()
 
 	try:

@@ -1,8 +1,12 @@
 
 logs/*
 build/*
-.metadata/*
 
 __pycache__/main.cpython-39.pyc
 src/ui/ome.sb
-test.txt
+template.txt
+
+*.txt_d
+*.txt_e
+*.txt_e_d
+*.txt_e_e

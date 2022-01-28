@@ -7,6 +7,10 @@ import os
 date = datetime.today()
 datereg = datetime.today().strftime ('%m-%d-%Y %H_%M_%S')
 
+def clear():
+    # check and make call for specific operating system
+    _ = os.system('clear' if os.name =='posix' else 'cls')
+
 class init:
 	def encrypt(filename, key):
 		fileOpen = open(filename, "rb")
