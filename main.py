@@ -45,6 +45,9 @@ class MainApp(QMainWindow, QWidget):
 		super().__init__()
 		uic.loadUi(LOCATION_UI + UI_FILENAME, self)
 		self.setWindowIcon(QIcon(ICON_PATH))
+		print('Finished Loading!')
+		if debug == True:
+			print(QIcon(ICON_PATH))
 
 
 		self.button_Encrypt.clicked.connect(self.encryption_file) # Connect button to a function
