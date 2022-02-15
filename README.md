@@ -10,7 +10,7 @@
 ### Release Version
 - If program doesn't start, install Python 3!
 
-If you will use the debug mode, open cmd: "CryPe_debug.exe .debug" to have MORE debug texts!
+If you want to use the debug mode, open cmd: "CryPe_debug.exe .debug" to have MORE debug texts!
 
 ### Source Code
 - Download Python 3 and install the PtQt5 library
